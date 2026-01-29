@@ -539,12 +539,12 @@ class NodeResult:
                     max_tokens=200,
                     messages=[{"role": "user", "content": prompt}],
                 )
-                
+
                 summary = message.content[0].text.strip()
                 return f"✓ {summary}"
             finally:
                 # Ensure the client is properly closed
-                if hasattr(client, 'close'):
+                if hasattr(client, "close"):
                     client.close()
 
         except Exception:
@@ -1363,12 +1363,14 @@ Output ONLY the JSON object, nothing else."""
                 if json_str:
                     extracted = json.loads(json_str)
                     # Format as key: value pairs
-                    parts = [f"{k}: {v}" for k, v in extracted.items() if k in ctx.node_spec.input_keys]
+                    parts = [
+                        f"{k}: {v}" for k, v in extracted.items() if k in ctx.node_spec.input_keys
+                    ]
                     if parts:
                         return "\n".join(parts)
             finally:
                 # Ensure the client is properly closed
-                if hasattr(client, 'close'):
+                if hasattr(client, "close"):
                     client.close()
 
         except Exception as e:
